@@ -72,7 +72,7 @@ jobs:
       DATABASE_PASSWORD: postgres
     services:
       postgres:
-        image: postgres:10.4
+        image: postgres:12.8
         env:
           POSTGRES_PASSWORD: "postgres"
         ports:
