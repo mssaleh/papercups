@@ -194,6 +194,17 @@ defmodule ChatApi.Messages.Helpers do
     end
   end
 
+  @spec update_message_conversation(map(), Message.t()) :: Conversation.t()
+  defp update_message_conversation(updates, %Message{conversation_id: conversation_id}) do
+    # TODO: DRY up this logic with other places we do conversation updates w/ broadcasting?
+    {:ok, conversation} =
+      conversation_id
+      |> Conversations.get_conversation!()
+      |> Conversations.update_conversation(updates)
+
+    conversation
+  end
+
   defp get_conversation_agent_id(%Conversation{account_id: account_id} = conversation) do
     agent_id =
       case conversation do
